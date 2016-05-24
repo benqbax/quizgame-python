@@ -1,0 +1,12 @@
+format: question/Alt1,Alt2,Alt3 - if alternativ has [R] then that alternativ is the right one!
+How many innings does a baseball game have?/[R]6,9,12
+What is the name of Mickey Mouse's pet dog?/Goofy,[R]Pluto,Donald
+What is the general name for a group of wolves?/Herd,Litter,Pack
+Which two fairytale characters ended up in a house made of gingerbread?/Hansel and Gretel,Jack and Jill,Alice and the White Rabbit
+Which movie actor uttered the famous words, Ill be back./[R]Mel Gibson in Lethal Weapon,Bruce Willis in Die Hard ,Arnold Schwarzenegger in Terminator
+What is the longest river in the world?/[R]Nile,Amazon,Mississippi
+Who said "One small step for man, one giant leap for mankind"?/John Glenn,Buzz Lightyear,[R]Neil Armstrong
+Scurvy is the result of a deficiency in which vitamin?/Vitamin C,[R]Vitamin D,Vitamin A
+Steven Tyler is the singer of which famous band?/The Rolling Stones,[R]Bon Jovi,Aerosmith
+The Statue of Liberty was given to the United States as a gift from which country?/Italy,[R]France,Spain
+Which bird was commonly used by humans to send messages?/[R]Blue Jay,Hawk,Pigeon
