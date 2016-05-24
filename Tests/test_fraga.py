@@ -1,5 +1,5 @@
 import unittest
-import fragesport_betygB
+import quizgame_nogui
 import random
 
 
@@ -22,19 +22,19 @@ class FragaTest(unittest.TestCase):
         ranWor1 = randomword(10)
         ranWor2 = randomword(5)
         ranWor3 = randomword(15)
-        questionlist.append((fragesport_betygB.Question(ranWor1, [ranWor1, ranWor2, ranWor3], ranWor2)))
+        questionlist.append((quizgame_nogui.Question(ranWor1, [ranWor1, ranWor2, ranWor3], ranWor2)))
 
     for i in range(0, 9):
         ranWor1 = randomword(10)
         ranWor2 = randomword(5)
         ranWor3 = randomword(15)
-        questionlist.append((fragesport_betygB.Question(ranWor1, [ranWor1, ranWor2, ranWor3], ranWor1)))
+        questionlist.append((quizgame_nogui.Question(ranWor1, [ranWor1, ranWor2, ranWor3], ranWor1)))
 
     for i in range(0, 9):
         ranWor1 = randomword(10)
         ranWor2 = randomword(5)
         ranWor3 = randomword(15)
-        questionlist.append((fragesport_betygB.Question(ranWor1, [ranWor1, ranWor2, ranWor3], ranWor3)))
+        questionlist.append((quizgame_nogui.Question(ranWor1, [ranWor1, ranWor2, ranWor3], ranWor3)))
 
     def test_init(self):
         """
@@ -50,7 +50,7 @@ class FragaTest(unittest.TestCase):
             self.assertEqual(question.get_answers(), question[1])
             self.assertEqual(question.right, question[2])
             self.assertEqual(question.get_right(), question[2])
-            self.assertIsInstance(question, fragesport_betygB.Question)
+            self.assertIsInstance(question, quizgame_nogui.Question)
             self.assertIsInstance(question[0], str)
             self.assertIsInstance(question[1], list)
             self.assertIsInstance(question[2], str)

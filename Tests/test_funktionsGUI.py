@@ -1,5 +1,5 @@
 import unittest
-import p_uppgift_BenForsrup
+import quizgame_gui
 import random
 import os
 
@@ -16,10 +16,10 @@ class FunkGUITest(unittest.TestCase):
 
     def test_check_name(self):
 
-        self.assertEqual(p_uppgift_BenForsrup.check_name(name = "\\"), 0)
-        self.assertEqual(p_uppgift_BenForsrup.check_name(name = "thisnameistodamnlong"), 2)
-        self.assertEqual(p_uppgift_BenForsrup.check_name(name = "sh"), 1)
-        self.assertEqual(p_uppgift_BenForsrup.check_name(name = "BestName"), 3)
+        self.assertEqual(quizgame_gui.check_name(name = "\\"), 0)
+        self.assertEqual(quizgame_gui.check_name(name = "thisnameistodamnlong"), 2)
+        self.assertEqual(quizgame_gui.check_name(name = "sh"), 1)
+        self.assertEqual(quizgame_gui.check_name(name = "BestName"), 3)
 
     def test_create_file(self):
         """
@@ -28,7 +28,7 @@ class FunkGUITest(unittest.TestCase):
         """
 
         # först skapar jag en testanvändare
-        name = p_uppgift_BenForsrup.create_name_file(name="testuser", directory="userscores")
+        name = quizgame_gui.create_name_file(name="testuser", directory="userscores")
         # testar att create_new_file har ett undantag för "testuser"
         self.assertEqual(name, "testuser")
         self.assertIsInstance(name, str)
@@ -36,10 +36,10 @@ class FunkGUITest(unittest.TestCase):
         self.assertTrue(os.path.exists("userscores/testuser.txt"))
 
         # kör funktionen igen, så att den skapar testuser(1)
-        p_uppgift_BenForsrup.create_name_file(name="testuser", directory="userscores")
+        quizgame_gui.create_name_file(name="testuser", directory="userscores")
         self.assertTrue(os.path.exists("userscores/testuser(1).txt"))
 
-        self.assertRaises(FileNotFoundError, p_uppgift_BenForsrup.create_name_file, "hedsada", "dfasd")
+        self.assertRaises(FileNotFoundError, quizgame_gui.create_name_file, "hedsada", "dfasd")
 
         # tar bort filen så samma sak kan testas igen
         os.remove("userscores/testuser(1).txt")
@@ -56,8 +56,8 @@ class FunkGUITest(unittest.TestCase):
         testFile = os.path.join("QuestionFolder", "fragor3.txt")
 
         # sparar frågorna i variabler
-        questions = p_uppgift_BenForsrup.read_files(fileName)
-        testQuestion = p_uppgift_BenForsrup.read_files(testFile)
+        questions = quizgame_gui.read_files(fileName)
+        testQuestion = quizgame_gui.read_files(testFile)
 
         # här kollar jag att frågan har lästs in rätt
         for que in testQuestion:
@@ -82,7 +82,7 @@ class FunkGUITest(unittest.TestCase):
 
 
         # Felhantering
-        self.assertRaises(FileNotFoundError, p_uppgift_BenForsrup.read_files, "aFileThatDoesNotExist.txt")
+        self.assertRaises(FileNotFoundError, quizgame_gui.read_files, "aFileThatDoesNotExist.txt")
 
     def test_save_file(self):
         """
@@ -95,7 +95,7 @@ class FunkGUITest(unittest.TestCase):
         name = "testuser"
         result = 1
 
-        p_uppgift_BenForsrup.save(result = result, name = name, rightOrWrong = rightorwrong, directory = "userscores")
+        quizgame_gui.save(result = result, name = name, rightOrWrong = rightorwrong, directory = "userscores")
         self.assertTrue(os.path.exists("userscores/testuser.txt"))
 
 
@@ -124,5 +124,5 @@ class FunkGUITest(unittest.TestCase):
         statlist = [[1, '36.36', 8], [2, '59.09', 13], [3, '40.91', 9], [4, '68.18', 15], [5, '27.27', 6],
                     [6, '50.00', 11], [7, '40.91', 9], [8, '59.09', 13], [9, '31.82', 7], [10, '50.00', 11],
                     [11, '31.82', 7]]
-        p_uppgift_BenForsrup.save_stats(statlist, "teststat.csv")
+        quizgame_gui.save_stats(statlist, "teststat.csv")
         self.assertTrue(os.path.isfile("teststat.csv"))

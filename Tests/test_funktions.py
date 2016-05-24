@@ -1,5 +1,5 @@
 import unittest
-import fragesport_betygB
+import quizgame_nogui
 import random
 import os
 
@@ -20,10 +20,10 @@ class FunkTest(unittest.TestCase):
 
     def test_check_name(self):
 
-        self.assertEqual(fragesport_betygB.check_name(name = "\\"), 0)
-        self.assertEqual(fragesport_betygB.check_name(name = "thisnameistodamnlong"), 2)
-        self.assertEqual(fragesport_betygB.check_name(name = "sh"), 1)
-        self.assertEqual(fragesport_betygB.check_name(name = "BestName"), 3)
+        self.assertEqual(quizgame_nogui.check_name(name = "\\"), 0)
+        self.assertEqual(quizgame_nogui.check_name(name = "thisnameistodamnlong"), 2)
+        self.assertEqual(quizgame_nogui.check_name(name = "sh"), 1)
+        self.assertEqual(quizgame_nogui.check_name(name = "BestName"), 3)
 
     def test_create_name_file(self):
         """
@@ -32,7 +32,7 @@ class FunkTest(unittest.TestCase):
         """
 
         # först skapar jag en testanvändare
-        name = fragesport_betygB.create_name_file(name="testuser", directory="userscores")
+        name = quizgame_nogui.create_name_file(name="testuser", directory="userscores")
         # testar att create_new_file har ett undantag för "testuser"
         self.assertEqual(name, "testuser")
         self.assertIsInstance(name, str)
@@ -40,10 +40,10 @@ class FunkTest(unittest.TestCase):
         self.assertTrue(os.path.exists("userscores/testuser.txt"))
 
         # kör funktionen igen, så att den skapar testuser(1)
-        fragesport_betygB.create_name_file(name="testuser", directory="userscores")
+        quizgame_nogui.create_name_file(name="testuser", directory="userscores")
         self.assertTrue(os.path.exists("userscores/testuser(1).txt"))
 
-        self.assertRaises(FileNotFoundError, fragesport_betygB.create_name_file,name = "bajs", directory="das")
+        self.assertRaises(FileNotFoundError, quizgame_nogui.create_name_file,name = "bajs", directory="das")
 
         # tar bort filen så samma sak kan testas igen
         os.remove("userscores/testuser(1).txt")
@@ -61,8 +61,8 @@ class FunkTest(unittest.TestCase):
         testFile = os.path.join("QuestionFolder", "fragor3.txt")
 
         # sparar frågorna i variabler
-        questions = fragesport_betygB.read_files(fileName)
-        testQuestion = fragesport_betygB.read_files(testFile)
+        questions = quizgame_nogui.read_files(fileName)
+        testQuestion = quizgame_nogui.read_files(testFile)
 
         # här kollar jag att frågan har lästs in rätt
         for que in testQuestion:
@@ -87,7 +87,7 @@ class FunkTest(unittest.TestCase):
 
 
         # Felhantering
-        self.assertRaises(FileNotFoundError, fragesport_betygB.read_files, "aFileThatDoesNotExist.txt")
+        self.assertRaises(FileNotFoundError, quizgame_nogui.read_files, "aFileThatDoesNotExist.txt")
 
     def test_save(self):
         """
@@ -100,7 +100,7 @@ class FunkTest(unittest.TestCase):
         name = "testuser"
         result = 1
 
-        fragesport_betygB.save(result = result, name = name, rightOrWrong = rightorwrong, directory = "userscores")
+        quizgame_nogui.save(result = result, name = name, rightOrWrong = rightorwrong, directory = "userscores")
         self.assertTrue(os.path.exists("userscores/testuser.txt"))
 
 
@@ -123,7 +123,7 @@ class FunkTest(unittest.TestCase):
 
 
         # Kolla att man får rätt error vid fel path(neg test)
-        self.assertRaises(FileNotFoundError, fragesport_betygB.save, result =  1, name = "peter", rightOrWrong = rightorwrong, directory = "DoesNotExist")
+        self.assertRaises(FileNotFoundError, quizgame_nogui.save, result =  1, name = "peter", rightOrWrong = rightorwrong, directory = "DoesNotExist")
 
     def test_save_stats(self):
         """
@@ -134,6 +134,6 @@ class FunkTest(unittest.TestCase):
                     [6, '50.00', 11], [7, '40.91', 9], [8, '59.09', 13], [9, '31.82', 7], [10, '50.00', 11],
                     [11, '31.82', 7]]
 
-        fragesport_betygB.save_stats(statlist, "../teststat.csv")
+        quizgame_nogui.save_stats(statlist, "../teststat.csv")
         self.assertTrue(os.path.isfile("../teststat.csv"))
         self.assertTrue(os.path.exists("../teststat.csv"))

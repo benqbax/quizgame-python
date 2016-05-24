@@ -1,5 +1,5 @@
 import unittest
-import fragesport_betygB
+import quizgame_nogui
 import random
 import os
 
@@ -20,9 +20,9 @@ class GameTest(unittest.TestCase):
     ranWor3 = randomword(15)
     questionlist = []
     for i in range(0, 11):
-        questionlist.append((fragesport_betygB.Question(ranWor1, [ranWor1, ranWor2, ranWor3], ranWor2)))
+        questionlist.append((quizgame_nogui.Question(ranWor1, [ranWor1, ranWor2, ranWor3], ranWor2)))
 
-    game = fragesport_betygB.Game(questionlist)
+    game = quizgame_nogui.Game(questionlist)
 
     def test_init(self):
         """
@@ -30,7 +30,7 @@ class GameTest(unittest.TestCase):
         :return:
         """
         for question in self.game.listOfQuestions:
-            self.assertIsInstance(question, fragesport_betygB.Question)
+            self.assertIsInstance(question, quizgame_nogui.Question)
 
 
         self.assertEqual(self.game.listOfQuestions, self.questionlist)
@@ -38,7 +38,7 @@ class GameTest(unittest.TestCase):
         self.assertRaises(TypeError, self.game.__init__, 2)
         self.assertRaises(TypeError, self.game.__init__, [2,3,2])
 
-        self.assertIsInstance(self.game, fragesport_betygB.Game)
+        self.assertIsInstance(self.game, quizgame_nogui.Game)
 
     def test_calc_highscore(self):
         """
@@ -61,8 +61,8 @@ class GameTest(unittest.TestCase):
 
     def test_calc_stats(self):
         """
-        Kollar att calc_stats fungerar. 
-        Först läses antalet rätt på fråga 1 i checkfirstque. 
+        Kollar att calc_stats fungerar.
+        Först läses antalet rätt på fråga 1 i checkfirstque.
         Därefter sparas en ny fil med endast 1 rätt
         just på fråga 1. Sedan kollar vi att den nya listan
         med antalet rätt är uppdaterad, och därmed är antalet rätt på fråga 1 större än innan.
@@ -73,7 +73,7 @@ class GameTest(unittest.TestCase):
 
         # lägga till ett rätt till fråga 1
         rightorwrong = [[1, 'R'], [2, 'F'], [3, 'F'], [4, 'F'], [5, 'F'], [6, 'F'], [7, 'F'], [8, 'F'], [9, 'F'], [10, 'F'], [11, 'F']]
-        fragesport_betygB.save(1, randomword(5), rightorwrong, "Tests/Testing Files")
+        quizgame_nogui.save(1, randomword(5), rightorwrong, "Tests/Testing Files")
 
         new_stats = self.game.calc_stats("Tests/Testing Files")
 
@@ -123,7 +123,7 @@ class GameTest(unittest.TestCase):
         """
         rightorwrong = [[1, 'R'], [2, 'F'], [3, 'F'], [4, 'F'], [5, 'F'], [6, 'F'], [7, 'F'], [8, 'F'], [9, 'F'],
                         [10, 'R'], [11, 'F']]
-        #fragesport_betygB.save(2, "SADA", rightorwrong, "Tests/Testing Files")
+        #quizgame_nogui.save(2, "SADA", rightorwrong, "Tests/Testing Files")
         statList = self.game.calc_stats(directory="Tests/Testing Files")
         statListProcent = self.game.calc_procentage(statList, directory="Tests/Testing Files")
         length = len(os.listdir("Tests/Testing Files"))
