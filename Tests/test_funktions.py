@@ -48,7 +48,6 @@ class FunkTest(unittest.TestCase):
         # tar bort filen så samma sak kan testas igen
         os.remove("userscores/testuser(1).txt")
 
-
     def test_read_files(self):
         """
         Testar read_files()
@@ -134,6 +133,6 @@ class FunkTest(unittest.TestCase):
                     [6, '50.00', 11], [7, '40.91', 9], [8, '59.09', 13], [9, '31.82', 7], [10, '50.00', 11],
                     [11, '31.82', 7]]
 
-        quizgame_nogui.save_stats(statlist, "../teststat.csv")
-        self.assertTrue(os.path.isfile("../teststat.csv"))
-        self.assertTrue(os.path.exists("../teststat.csv"))
+        quizgame_nogui.save_stats(statlist, "teststat.csv")
+        self.assertTrue(os.path.isfile("teststat.csv"))
+        self.assertTrue(os.path.exists("teststat.csv"))
