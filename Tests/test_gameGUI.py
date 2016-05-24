@@ -1,5 +1,5 @@
 import unittest
-import p_uppgift_BenForsrup
+import quizgame_gui
 import random
 import tkinter as tk
 import os
@@ -20,9 +20,9 @@ ranWor2 = randomword(5)
 ranWor3 = randomword(15)
 questionlist = []
 for i in range(0, 11):
-    questionlist.append((p_uppgift_BenForsrup.Question(ranWor1, [ranWor1, ranWor2, ranWor3], ranWor2)))
+    questionlist.append((quizgame_gui.Question(ranWor1, [ranWor1, ranWor2, ranWor3], ranWor2)))
 root = tk.Tk()
-app = p_uppgift_BenForsrup.MainApplication(root, questionlist)
+app = quizgame_gui.MainApplication(root, questionlist)
 
 
 class GameGUITest(unittest.TestCase):
@@ -33,7 +33,7 @@ class GameGUITest(unittest.TestCase):
         :return:
         """
 
-        highscore = p_uppgift_BenForsrup.Highscore(root, listOfQuestions=questionlist)
+        highscore = quizgame_gui.Highscore(root, listOfQuestions=questionlist)
 
         test_highscore = highscore.calc_highscore(directory="Tests/Testing Files")
         self.assertTrue(test_highscore is not None)
@@ -50,14 +50,14 @@ class GameGUITest(unittest.TestCase):
         rätt är uppdaterad, och därmed är antalet rätt på fråga 1 större än innan.
         :return:
         """
-        statistics = p_uppgift_BenForsrup.Highscore(root, listOfQuestions=questionlist)
+        statistics = quizgame_gui.Highscore(root, listOfQuestions=questionlist)
 
         checkfirstque = statistics.calc_stats("Tests/Testing Files")[1]
 
         # lägga till ett rätt till fråga 1
         rightorwrong = [[1, 'R'], [2, 'F'], [3, 'F'], [4, 'F'], [5, 'F'], [6, 'F'], [7, 'F'], [8, 'F'], [9, 'F'],
                         [10, 'F'], [11, 'F']]
-        p_uppgift_BenForsrup.save(10, randomword(5), rightorwrong, "Tests/Testing Files")
+        quizgame_gui.save(10, randomword(5), rightorwrong, "Tests/Testing Files")
 
         teststat2 = statistics.calc_stats("Tests/Testing Files")
         self.assertTrue(teststat2[1] > checkfirstque)
@@ -70,19 +70,19 @@ class GameGUITest(unittest.TestCase):
         Testar att right or wrong
         :return:
         """
-        game = p_uppgift_BenForsrup.Game(root, qList=questionlist)
+        game = quizgame_gui.Game(root, qList=questionlist)
         for question in game.qList:
             # Positivt test
-            self.assertTrue(p_uppgift_BenForsrup.Game.right_or_wrong(question, question.get_right()))
+            self.assertTrue(quizgame_gui.Game.right_or_wrong(question, question.get_right()))
             # Negativt test
-            self.assertFalse(p_uppgift_BenForsrup.Game.right_or_wrong(question, "Köttfärs"))
+            self.assertFalse(quizgame_gui.Game.right_or_wrong(question, "Köttfärs"))
 
     def test_calc_procentage(self):
         """
         Testar att calc_procentage fungerar
         :return:
         """
-        game = p_uppgift_BenForsrup.Highscore(root, listOfQuestions=questionlist)
+        game = quizgame_gui.Highscore(root, listOfQuestions=questionlist)
         rightorwrong = [[1, 'R'], [2, 'F'], [3, 'F'], [4, 'F'], [5, 'F'], [6, 'F'], [7, 'F'], [8, 'F'], [9, 'F'],
                         [10, 'R'], [11, 'F']]
         statList = game.calc_stats(directory="Tests/Testing Files")
